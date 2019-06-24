@@ -52,7 +52,7 @@ export default class MyApp extends App {
 	render() {
 		const { Component, pageProps } = this.props;
 		const { media } = this.state;
-		const MediaLayout = media !== "xs" ? LayoutMobile : Layout;
+		const MediaLayout = media === "xs" ? LayoutMobile : Layout;
 
 		return (
 			<>

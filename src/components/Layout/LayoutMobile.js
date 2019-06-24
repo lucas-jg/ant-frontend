@@ -90,9 +90,8 @@ class LayoutMobile extends React.Component {
 						<div className="logo" />
 						<Button type="dashed" onClick={this.showDrawer}>
 							<Icon type="menu-fold" />
-							열기
 						</Button>
-						<Button type="dashed" onClick={e => this.changeFamily("Noto Sans KR")}>
+						{/* <Button type="dashed" onClick={e => this.changeFamily("Noto Sans KR")}>
 							Noto Sans KR
 						</Button>
 						<Button type="dashed" onClick={e => this.changeFamily("Hanna")}>
@@ -127,7 +126,7 @@ class LayoutMobile extends React.Component {
 						</Button>
 						<Button type="dashed" onClick={e => this.changeFamily("Jeju Myeongjo")}>
 							Jeju Myeongjo
-						</Button>
+						</Button> */}
 					</Header>
 					<Content style={{ margin: "50px 0", minHeight: "800px" }}>
 						<Drawer
