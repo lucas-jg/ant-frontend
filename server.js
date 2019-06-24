@@ -15,7 +15,8 @@ const serverSideRender = (req, res, pagePath, queryParams) => {
 };
 
 const ssrCache = cacheableResponse({
-	ttl: 1000 * 60 * 5, // 5분
+	// ttl: 1000 * 60 * 5, // 5분
+	ttl: 1000,
 	get: async ({ req, res, pagePath, queryParams }) => ({
 		data: await serverSideRender(req, res, pagePath, queryParams)
 	}),
@@ -42,6 +43,12 @@ app.prepare().then(() => {
 	// 	const pagePath = "/blog";
 	// 	return ssrCache({ req, res, pagePath, queryParams });
 	// });
+
+	server.get("/classes/:id", (req, res) => {
+		const queryParams = { id: req.params.id };
+		const pagePath = "/classes";
+		return ssrCache({ req, res, pagePath, queryParams });
+	});
 
 	server.get("*", (req, res) => handle(req, res));
 

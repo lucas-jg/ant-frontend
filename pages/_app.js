@@ -2,8 +2,9 @@ import React from "react";
 import App, { Container } from "next/app";
 import Layout from "../src/components/Layout/Layout";
 import LayoutMobile from "../src/components/Layout/LayoutMobile";
+import withData from "../src/lib/apollo";
 
-export default class MyApp extends App {
+class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {
 		let pageProps = {};
 
@@ -25,8 +26,8 @@ export default class MyApp extends App {
 	}
 
 	componentWillUnmount() {
-		const { mediaListener } = this.state;
-		window.removeEventListener(mediaListener);
+		// const { mediaListener } = this.state;
+		// window.removeEventListener(mediaListener);
 	}
 
 	setMedia = () => {
@@ -65,3 +66,5 @@ export default class MyApp extends App {
 		);
 	}
 }
+
+export default withData(MyApp);

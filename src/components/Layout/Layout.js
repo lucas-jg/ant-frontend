@@ -72,7 +72,7 @@ class Layout extends React.Component {
 					</Header>
 					<Content style={{ margin: "50px 0", minHeight: "800px" }}>
 						<Row>
-							<Col xs={{ span: 22, offset: 1 }} xl={{ span: 16, offset: 4 }}>
+							<Col xs={{ span: 22, offset: 1 }} xl={{ span: 13, offset: 5 }}>
 								{children}
 							</Col>
 						</Row>
