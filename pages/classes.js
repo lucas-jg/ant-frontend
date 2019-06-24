@@ -13,7 +13,7 @@ const ClassesContent = ({ target }) => {
 	return (
 		<>
 			<h1>{title}</h1>
-			<Card cover={<img alt="cover" src={`http://localhost:1337${thumbnail.url}`} />}>
+			<Card cover={<img alt="cover" src={`http://13.125.38.140:1337${thumbnail.url}`} />}>
 				{content}
 			</Card>
 		</>

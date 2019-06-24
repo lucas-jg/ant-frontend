@@ -25,7 +25,9 @@ const ClassList = ({ data: { loading, error, classes }, search }, req) => {
 										cover={
 											<img
 												alt="example"
-												src={`http://localhost:1337${res.thumbnail.url}`}
+												src={`http://13.125.38.140:1337${
+													res.thumbnail.url
+												}`}
 											/>
 										}
 										key={res._id}
