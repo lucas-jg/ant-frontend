@@ -15,8 +15,7 @@ const serverSideRender = (req, res, pagePath, queryParams) => {
 };
 
 const ssrCache = cacheableResponse({
-	// ttl: 1000 * 60 * 5, // 5분
-	ttl: 1000,
+	ttl: 1000 * 60 * 5, // 5분
 	get: async ({ req, res, pagePath, queryParams }) => ({
 		data: await serverSideRender(req, res, pagePath, queryParams)
 	}),
