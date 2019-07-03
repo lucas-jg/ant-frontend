@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import { withRouter } from 'next/router'
+import Router, { withRouter } from 'next/router'
 import { Layout as AntLayout, Menu, Button, Icon } from 'antd'
-import LogoIcon from '../../../assets/image/logo.png'
-import { getUserFromLocalCookie, unsetToken } from '../../lib/auth'
+import LogoIcon from '../../../../assets/image/logo.png'
+import { getUserFromLocalCookie, unsetToken } from '../../../lib/auth'
 import { menuList } from './MenuList'
 
 class Layout extends React.Component {
@@ -28,8 +28,6 @@ class Layout extends React.Component {
 		const menuKey = new Array(path.length < 1 ? 'home' : path)
 		const loggedUser = getUserFromLocalCookie()
 
-		console.log(`PC media : ${media}`)
-
 		return (
 			<>
 				<Head>
@@ -47,6 +45,7 @@ class Layout extends React.Component {
 											alt="header-logo"
 											className="header-logo"
 											src={LogoIcon}
+											onClick={() => Router.push('/')}
 										/>
 									</Link>
 								</div>

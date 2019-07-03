@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import { withRouter } from 'next/router'
+import Router, { withRouter } from 'next/router'
 import { Layout as AntLayout, Menu, Row, Col, Drawer, Button, Icon } from 'antd'
 import { compose } from 'recompose'
-import LogoIcon from '../../../assets/image/logo.png'
-import { getUserFromLocalCookie, unsetToken } from '../../lib/auth'
+import LogoIcon from '../../../../assets/image/logo.png'
+import { getUserFromLocalCookie, unsetToken } from '../../../lib/auth'
 import { menuList } from './MenuList'
 
 class LayoutMobile extends React.Component {
@@ -56,11 +56,10 @@ class LayoutMobile extends React.Component {
 
 		const iconStyle = {
 			fontSize: '25px',
-			lineHeight: '25px'
+			lineHeight: '25px',
+			margin: '0 5px 0 10px'
 			// height: '25px'
 		}
-
-		console.log(`Mobile media : ${media}`)
 
 		return (
 			<>
@@ -85,19 +84,25 @@ class LayoutMobile extends React.Component {
 					<Header style={{ padding: '0 10px' }}>
 						{media !== '' && (
 							<div className="mobile-header-template">
-								<img className="mobile-logo" alt="logo" src={LogoIcon} />
+								<img
+									className="mobile-logo"
+									alt="logo"
+									src={LogoIcon}
+									onClick={() => Router.push('/')}
+								/>
 								<div className="mobile-header">
 									<Icon
-										className="mobile-header-icon"
 										type="menu-fold"
 										onClick={this.showDrawer}
 										style={iconStyle}
 									/>
-									<Icon
-										className="mobile-header-icon"
-										type="login"
-										style={iconStyle}
-									/>
+									{!loggedUser && (
+										<Icon
+											type="login"
+											style={iconStyle}
+											onClick={() => Router.push('/signin')}
+										/>
+									)}
 								</div>
 							</div>
 						)}
@@ -110,6 +115,11 @@ class LayoutMobile extends React.Component {
 							onClose={this.onClose}
 							visible={this.state.visible}
 						>
+							{loggedUser && (
+								<Button type="primary" onClick={unsetToken}>
+									로그아웃
+								</Button>
+							)}
 							<Menu style={{ lineHeight: '64px' }} selectedKeys={menuKey}>
 								{menuList.map(v => {
 									if (v.isAuthenticated) {
@@ -144,17 +154,15 @@ class LayoutMobile extends React.Component {
 						.mobile-header-template {
 							display: flex;
 							justify-content: space-between;
-							align-items: center;
+							align-items: flex-start;
 							width: 100%;
 						}
 						.mobile-logo {
 							width: 140px;
+							margin-top: 7px;
 						}
 						.mobile-header {
-						}
-
-						.mobile-header-icon {
-							font-size: 15px;
+							margin-top: 7px;
 						}
 					`}
 				</style>

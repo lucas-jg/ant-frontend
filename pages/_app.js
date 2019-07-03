@@ -1,7 +1,7 @@
 import React from 'react'
 import App, { Container } from 'next/app'
-import Layout from '../src/components/Layout/Layout'
-import LayoutMobile from '../src/components/Layout/LayoutMobile'
+import Layout from '../src/components/common/Layout/Layout'
+import LayoutMobile from '../src/components/common/Layout/LayoutMobile'
 import withData from '../src/lib/apollo'
 
 class MyApp extends App {
