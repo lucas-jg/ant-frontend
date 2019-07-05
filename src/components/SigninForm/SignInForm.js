@@ -20,7 +20,8 @@ class SignInForm extends React.Component {
 
 	componentDidMount() {
 		if (this.props.isAuthenticated) {
-			Router.push('/') // redirect if you're already logged in
+			// redirect if you're already logged in
+			Router.push('/')
 		}
 	}
 
