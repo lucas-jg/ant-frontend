@@ -6,90 +6,93 @@ import { Card, Row, Col, Spin } from 'antd'
 const { Meta } = Card
 
 class ClassList extends React.Component {
-	render() {
-		const {
-			data: { loading, error, classes },
-			title
-		} = this.props
+    render() {
+        const {
+            data: { loading, error, classes },
+            title
+        } = this.props
 
-		if (error) return `Error loading ClassList : ${error}`
-		//if restaurants are returned from the GraphQL query, run the filter query
-		//and set equal to variable restaurantSearch
+        if (error) return `Error loading ClassList : ${error}`
+        //if restaurants are returned from the GraphQL query, run the filter query
+        //and set equal to variable restaurantSearch
 
-		if (classes && classes.length) {
-			// const searchQuery = classes.filter(query => query.title.toLowerCase().includes(search))
-			// if (searchQuery.length != 0) {
-			return (
-				<div>
-					<h1>{title}</h1>
-					<Row gutter={8}>
-						{classes.map(res => (
-							<Col xs={12} lg={6} key={res.id}>
-								<Link as={`/classes/${res.id}`} href={`/classes?id=${res.id}`}>
-									<Card
-										hoverable
-										style={{ width: '100%', margin: '10px 0 10px 0' }}
-										cover={
-											<img
-												alt="example"
-												src={`http://13.125.38.140:1337${
-													res.thumbnail.url
-												}`}
-											/>
-										}
-										key={res._id}
-									>
-										<Meta title={res.title} description={res.subTitle} />
-									</Card>
-								</Link>
-							</Col>
-						))}
-					</Row>
+        if (classes && classes.length) {
+            // const searchQuery = classes.filter(query => query.title.toLowerCase().includes(search))
+            // if (searchQuery.length != 0) {
+            return (
+                <div>
+                    <h1>{title}</h1>
+                    <Row gutter={8}>
+                        {classes.map(res => (
+                            <Col xs={12} lg={6} key={res.id}>
+                                <Link as={`/classes/${res.id}`} href={`/classes?id=${res.id}`}>
+                                    <Card
+                                        hoverable
+                                        style={{ width: '100%', margin: '10px 0 10px 0' }}
+                                        cover={
+                                            <img
+                                                alt="example"
+                                                src={`http://13.125.38.140:1337${
+                                                    res.thumbnail.url
+                                                }`}
+                                            />
+                                        }
+                                        key={res._id}
+                                    >
+                                        <Meta title={res.title} description={res.subTitle} />
+                                    </Card>
+                                </Link>
+                            </Col>
+                        ))}
+                    </Row>
 
-					<style jsx global>
-						{`
-							a {
-								color: white;
-							}
-							a:link {
-								text-decoration: none;
-								color: white;
-							}
-							a:hover {
-								color: white;
-							}
-							.card-columns {
-								column-count: 3;
-							}
-						`}
-					</style>
-				</div>
-			)
-		}
-		// }
-		// else {
-		//     return <h1>No classes found</h1>
-		// }
-		return (
-			<h1>
-				<Spin size="large" />
-			</h1>
-		)
-	}
+                    <style jsx global>
+                        {`
+                            h1 {
+                                margin-top: 20px;
+                            }
+                            a {
+                                color: white;
+                            }
+                            a:link {
+                                text-decoration: none;
+                                color: white;
+                            }
+                            a:hover {
+                                color: white;
+                            }
+                            .card-columns {
+                                column-count: 3;
+                            }
+                        `}
+                    </style>
+                </div>
+            )
+        }
+        // }
+        // else {
+        //     return <h1>No classes found</h1>
+        // }
+        return (
+            <h1>
+                <Spin size="large" />
+            </h1>
+        )
+    }
 }
 
 const query = gql`
-	{
-		classes {
-			id
-			title
-			subTitle
-			price
-			thumbnail {
-				url
-			}
-		}
-	}
+    {
+        classes {
+            id
+            title
+            subTitle
+            price
+            thumbnail {
+                url
+            }
+        }
+    }
 `
 
 // ClassList.getInitialProps = async ({ req }) => {
@@ -100,7 +103,7 @@ const query = gql`
 // The `graphql` wrapper executes a GraphQL query and makes the results
 // available on the `data` prop of the wrapped component (RestaurantList)
 export default graphql(query, {
-	props: ({ data }) => ({
-		data
-	})
+    props: ({ data }) => ({
+        data
+    })
 })(ClassList)
