@@ -1,7 +1,3 @@
-import Video from "../src/components/Video/Video";
+import Video from '../src/components/common/Video/Video'
 
-export default () => (
-	<div>
-		<Video />
-	</div>
-);
+export default () => <div>{/* <Video /> */}</div>
