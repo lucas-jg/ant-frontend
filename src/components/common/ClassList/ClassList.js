@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Card, Row, Col, Spin } from 'antd'
+import { backendHost } from '../../../lib/common'
 
 const { Meta } = Card
 
@@ -32,9 +33,7 @@ class ClassList extends React.Component {
                                         cover={
                                             <img
                                                 alt="example"
-                                                src={`http://13.125.38.140:1337${
-                                                    res.thumbnail.url
-                                                }`}
+                                                src={backendHost + res.thumbnail.url}
                                             />
                                         }
                                         key={res._id}

@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { withRouter } from 'next/router'
 import { graphql } from 'react-apollo'
 import { compose } from 'recompose'
+import { backendHost } from '../src/lib/common'
 
 import { Card, Row, Col, Button, notification, Icon } from 'antd'
 
@@ -13,16 +14,14 @@ const ClassesContent = ({ target }) => {
     return (
         <>
             <h1>{title}</h1>
-            <Card cover={<img alt="cover" src={`http://13.125.38.140:1337${thumbnail.url}`} />}>
-                {content}
-            </Card>
+            <Card cover={<img alt="cover" src={backendHost + thumbnail.url} />}>{content}</Card>
 
             {detailImages.map((detailImage, i) => (
                 <img
                     className="class-detail-img"
                     alt="detail"
                     key={i}
-                    src={`http://13.125.38.140:1337${detailImage.url}`}
+                    src={backendHost + detailImage.url}
                 />
             ))}
             <style jsx>{`

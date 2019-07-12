@@ -5,6 +5,8 @@ import { compose } from 'recompose'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import '../../../../assets/gallery.css'
+import { backendHost } from '../../../lib/common'
+
 class Gallery extends React.Component {
     render() {
         // [{ original : url}]
@@ -13,7 +15,7 @@ class Gallery extends React.Component {
         } = this.props
 
         console.log(error)
-        console.log(banner)
+        console.log(backendHost)
 
         if (error) return 'Error Loading Dishes'
 
@@ -23,7 +25,7 @@ class Gallery extends React.Component {
                     <ImageGallery
                         items={banner.classes.map(classData => {
                             return {
-                                original: `http://13.125.38.140:1337${classData.thumbnail.url}`
+                                original: backendHost + classData.thumbnail.url
                             }
                         })}
                         showFullscreenButton={false}
@@ -62,7 +64,7 @@ export default compose(
         options: props => {
             return {
                 variables: {
-                    id: '5d1f6e7d67ce954f9a6325de'
+                    id: props.bannerId
                 }
             }
         },

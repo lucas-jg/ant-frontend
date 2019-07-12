@@ -20,12 +20,12 @@ export default class Index extends React.Component {
             <>
                 <Row>
                     <Col>
-                        <Gallery bannerId={0} />
+                        <Gallery bannerId="5d1f6e7d67ce954f9a6325de" />
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <ClassList title="title" />
+                        <ClassList />
                     </Col>
                 </Row>
             </>

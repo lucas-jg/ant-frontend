@@ -3,93 +3,94 @@ import Cookies from 'js-cookie'
 import Strapi from 'strapi-sdk-javascript/build/main'
 
 import Router from 'next/router'
+import { backendHost } from '../lib/common'
 
-const apiUrl = process.env.API_URL || 'http://13.125.38.140:1337'
+const apiUrl = process.env.API_URL || backendHost
 const strapi = new Strapi(apiUrl)
 
 export const strapiRegister = (username, email, password) => {
-	if (!process.browser) {
-		return undefined
-	}
-	strapi.register(username, email, password).then(res => {
-		setToken(res)
-	})
-	return Promise.resolve()
+    if (!process.browser) {
+        return undefined
+    }
+    strapi.register(username, email, password).then(res => {
+        setToken(res)
+    })
+    return Promise.resolve()
 }
 //use strapi to get a JWT and token object, save
 //to approriate cookei for future requests
 export const strapiLogin = (email, password) => {
-	if (!process.browser) {
-		return
-	}
-	// Get a token
-	strapi.login(email, password).then(res => {
-		setToken(res)
-	})
-	return Promise.resolve()
+    if (!process.browser) {
+        return
+    }
+    // Get a token
+    strapi.login(email, password).then(res => {
+        setToken(res)
+    })
+    return Promise.resolve()
 }
 
 export const setToken = token => {
-	if (!process.browser) {
-		return
-	}
+    if (!process.browser) {
+        return
+    }
 
-	Cookies.set('id', token.user.id, { expires: 7 })
-	Cookies.set('username', token.user.username, { expires: 7 })
-	Cookies.set('jwt', token.jwt, { expires: 7 })
+    Cookies.set('id', token.user.id, { expires: 7 })
+    Cookies.set('username', token.user.username, { expires: 7 })
+    Cookies.set('jwt', token.jwt, { expires: 7 })
 
-	if (Cookies.get('username')) {
-		Router.push('/')
-	}
+    if (Cookies.get('username')) {
+        Router.push('/')
+    }
 }
 
 export const unsetToken = () => {
-	if (!process.browser) {
-		return
-	}
-	Cookies.remove('jwt')
-	Cookies.remove('username')
-	Cookies.remove('id')
+    if (!process.browser) {
+        return
+    }
+    Cookies.remove('jwt')
+    Cookies.remove('username')
+    Cookies.remove('id')
 
-	// to support logging out from all windows
-	window.localStorage.setItem('logout', Date.now())
-	Router.push('/')
+    // to support logging out from all windows
+    window.localStorage.setItem('logout', Date.now())
+    Router.push('/')
 }
 
 export const getUserFromServerCookie = req => {
-	if (!req.headers.cookie || '') {
-		return undefined
-	}
+    if (!req.headers.cookie || '') {
+        return undefined
+    }
 
-	let username = req.headers.cookie.split(';').find(user => user.trim().startsWith('username='))
-	if (username) {
-		username = username.split('=')[1]
-	}
+    let username = req.headers.cookie.split(';').find(user => user.trim().startsWith('username='))
+    if (username) {
+        username = username.split('=')[1]
+    }
 
-	const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
-	if (!jwtCookie) {
-		return undefined
-	}
-	const jwt = jwtCookie.split('=')[1]
-	return jwtDecode(jwt), username
+    const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
+    if (!jwtCookie) {
+        return undefined
+    }
+    const jwt = jwtCookie.split('=')[1]
+    return jwtDecode(jwt), username
 }
 
 export const getUserFromLocalCookie = () => {
-	return Cookies.get('username')
+    return Cookies.get('username')
 }
 
 //these will be used if you expand to a provider such as Auth0
 const getQueryParams = () => {
-	const params = {}
-	window.location.href.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
-		params[$1] = $3
-	})
-	return params
+    const params = {}
+    window.location.href.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
+        params[$1] = $3
+    })
+    return params
 }
 export const extractInfoFromHash = () => {
-	if (!process.browser) {
-		return undefined
-	}
-	const { id_token, state } = getQueryParams()
-	return { token: id_token, secret: state }
+    if (!process.browser) {
+        return undefined
+    }
+    const { id_token, state } = getQueryParams()
+    return { token: id_token, secret: state }
 }
