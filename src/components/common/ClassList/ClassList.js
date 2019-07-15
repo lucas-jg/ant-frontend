@@ -32,6 +32,7 @@ class ClassList extends React.Component {
                                         style={{ width: '100%', margin: '10px 0 10px 0' }}
                                         cover={
                                             <img
+                                                className="cover-img"
                                                 alt="example"
                                                 src={backendHost + res.thumbnail.url}
                                             />
@@ -62,6 +63,10 @@ class ClassList extends React.Component {
                             }
                             .card-columns {
                                 column-count: 3;
+                            }
+                            .cover-img {
+                                object-fit: cover;
+                                height: 130px;
                             }
                         `}
                     </style>

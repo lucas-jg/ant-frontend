@@ -42,6 +42,16 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.image-gallery-image img {
+    object-fit: cover;
+    height: 300px;
+}
+@media (max-width: 768px) {
+    .image-gallery-image img {
+        height: 200px;
+    }
+}
+
 .image-gallery {
     -webkit-user-select: none;
     -moz-user-select: none;
