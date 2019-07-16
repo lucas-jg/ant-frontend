@@ -5,8 +5,11 @@ import { withData } from 'next-apollo'
 import { backendHost } from '../lib/common'
 
 const config = {
-    link: new HttpLink({
-        uri: `${backendHost}/graphql` // Server URL (must be absolute)
-    })
+	link: new HttpLink({
+		uri: `${backendHost}/graphql`, // Server URL (must be absolute)
+		headers: {
+			Authorization: `Bearer ${Cookies.get('jwt')}`
+		}
+	})
 }
 export default withData(config)
