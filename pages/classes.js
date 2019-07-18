@@ -9,12 +9,14 @@ import { Card, Row, Col, Button, notification, Icon } from 'antd'
 const { Meta } = Card
 
 const ClassesContent = ({ target }) => {
-    const { title, content, thumbnail, detailImages } = target
+    const { title, description, thumbnail, detailImages } = target
 
     return (
         <>
             <h1>{title}</h1>
-            <Card cover={<img alt="cover" src={backendHost + thumbnail.url} />}>{content}</Card>
+            <Card cover={<img alt="cover" src={backendHost + thumbnail[0].url} />}>
+                {description}
+            </Card>
 
             {detailImages.map((detailImage, i) => (
                 <img
@@ -34,14 +36,14 @@ const ClassesContent = ({ target }) => {
 }
 
 const ClassesInfo = ({ target }) => {
-    const { title, owner, price, discount } = target
+    const { title, owner, price, discountPrice } = target
 
     return (
         <>
             <div className="class-info-tamplate">
                 <p>owner : {owner.username}</p>
                 <p>price : {price}</p>
-                <p>discount : {discount}</p>
+                <p>discountPrice : {discountPrice}</p>
                 <Row gutter={8}>
                     <Col span={12}>
                         <Button
@@ -137,10 +139,9 @@ const GET_RESTAURANT_DISHES = gql`
         target: class(id: $id) {
             id
             title
-            subTitle
+            description
             price
-            discount
-            content
+            discountPrice
             owner {
                 username
             }
