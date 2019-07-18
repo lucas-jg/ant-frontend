@@ -3,6 +3,7 @@
 import { HttpLink } from 'apollo-link-http'
 import { withData } from 'next-apollo'
 import { backendHost } from '../lib/common'
+import Cookies from 'js-cookie'
 
 const config = {
 	link: new HttpLink({
