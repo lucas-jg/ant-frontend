@@ -11,7 +11,7 @@ class Gallery extends React.Component {
     render() {
         // [{ original : url}]
         const {
-            data: { loading, error, banner }
+            data: { loading, error, plans }
         } = this.props
 
         console.log(error)
@@ -19,13 +19,13 @@ class Gallery extends React.Component {
 
         if (error) return 'Error Loading Dishes'
 
-        if (banner) {
+        if (plans) {
             return (
                 <>
                     <ImageGallery
-                        items={banner.classes.map(classData => {
+                        items={plans[0].plannedclasses.map(planData => {
                             return {
-                                original: backendHost + classData.thumbnail.url
+                                original: backendHost + planData.class.thumbnail[0].url
                             }
                         })}
                         showFullscreenButton={false}
@@ -46,13 +46,17 @@ class Gallery extends React.Component {
 }
 
 const GET_BANNER_CLASS = gql`
-    query($id: ID!) {
-        banner(id: $id) {
-            id
+    query {
+        plans(where: { isBanner: true, isActive: true }) {
             title
-            classes {
-                thumbnail {
-                    url
+            designPattern
+            plannedclasses {
+                class {
+                    title
+                    description
+                    thumbnail {
+                        url
+                    }
                 }
             }
         }
@@ -61,13 +65,6 @@ const GET_BANNER_CLASS = gql`
 
 export default compose(
     graphql(GET_BANNER_CLASS, {
-        options: props => {
-            return {
-                variables: {
-                    id: props.bannerId
-                }
-            }
-        },
         props: ({ data }) => ({ data })
     })
 )(Gallery)
