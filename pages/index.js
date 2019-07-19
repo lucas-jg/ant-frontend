@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Row, Col } from 'antd'
 import ClassList from '../src/components/common/ClassList'
+import PlanList from '../src/components/PlanList'
 import Gallery from '../src/components/common/Gallery'
 
 export default class Index extends React.Component {
@@ -28,6 +29,7 @@ export default class Index extends React.Component {
                         <ClassList />
                     </Col>
                 </Row>
+                <PlanList />
             </>
         )
     }

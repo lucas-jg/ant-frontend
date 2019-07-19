@@ -4,8 +4,6 @@ import gql from 'graphql-tag'
 import { Card, Row, Col, Spin } from 'antd'
 import { backendHost } from '../../../lib/common'
 
-const { Meta } = Card
-
 class ClassList extends React.Component {
     render() {
         const {
@@ -29,7 +27,10 @@ class ClassList extends React.Component {
                                 <Link as={`/classes/${res.id}`} href={`/classes?id=${res.id}`}>
                                     <Card
                                         hoverable
-                                        style={{ width: '100%', margin: '10px 0 10px 0' }}
+                                        style={{
+                                            width: '100%',
+                                            margin: '10px 0 10px 0'
+                                        }}
                                         cover={
                                             <img
                                                 className="cover-img"
@@ -39,16 +40,10 @@ class ClassList extends React.Component {
                                         }
                                         key={res._id}
                                     >
-                                        <Meta
-                                            title={res.title}
-                                            description={res.description}
-                                            style={{
-                                                textOverflow: 'ellipsis',
-                                                overflow: 'hidden',
-                                                whiteSpace: 'nowrap',
-                                                width: '100%'
-                                            }}
-                                        />
+                                        <div className="card-text">
+                                            {res.title}
+                                            <p>{res.description}</p>
+                                        </div>
                                     </Card>
                                 </Link>
                             </Col>
@@ -76,6 +71,17 @@ class ClassList extends React.Component {
                             .cover-img {
                                 object-fit: cover;
                                 height: 130px;
+                            }
+                            .card-text {
+                                font-size: 14px;
+                                text-overflow: 'ellipsis';
+                                overflow: 'hidden';
+                                white-space: 'nowrap';
+                                width: 100%;
+                            }
+                            .card-text p {
+                                font-size: 12px;
+                                color: #aaa;
                             }
                         `}
                     </style>
