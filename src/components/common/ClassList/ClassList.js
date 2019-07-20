@@ -78,6 +78,7 @@ class ClassList extends React.Component {
                                 overflow: 'hidden';
                                 white-space: 'nowrap';
                                 width: 100%;
+                                height: 60px;
                             }
                             .card-text p {
                                 font-size: 12px;

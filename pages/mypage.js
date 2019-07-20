@@ -115,6 +115,19 @@ class MyPage extends React.Component {
                             height: 100px;
                             border-radius: 50px;
                         }
+                        .cover-img {
+                            object-fit: cover;
+                            height: 130px;
+                        }
+                        .card-text {
+                            font-size: 14px;
+                            height: 60px;
+                            width: 100%;
+                        }
+                        .card-text p {
+                            font-size: 12px;
+                            color: #aaa;
+                        }
                     `}</style>
                 </>
             )
