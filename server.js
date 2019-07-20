@@ -50,6 +50,12 @@ app.prepare().then(() => {
         return ssrCache({ req, res, pagePath, queryParams })
     })
 
+    server.get('/mypage/:id', (req, res) => {
+        const queryParams = { id: req.params.id }
+        const pagePath = '/mypage'
+        return ssrCache({ req, res, pagePath, queryParams })
+    })
+
     server.get('*', (req, res) => handle(req, res))
 
     server.listen(port, err => {
