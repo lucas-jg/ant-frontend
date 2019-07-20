@@ -40,7 +40,7 @@ class Gallery extends React.Component {
                 </>
             )
         } else {
-            return <div>wfefew</div>
+            return <div />
         }
     }
 }

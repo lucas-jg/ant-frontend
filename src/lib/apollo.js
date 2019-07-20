@@ -5,12 +5,20 @@ import { withData } from 'next-apollo'
 import { backendHost } from '../lib/common'
 import Cookies from 'js-cookie'
 
-const config = {
-	link: new HttpLink({
-		uri: `${backendHost}/graphql`, // Server URL (must be absolute)
-		headers: {
-			Authorization: `Bearer ${Cookies.get('jwt')}`
-		}
-	})
-}
+const jwt = Cookies.get('jwt')
+
+const config = !!jwt
+    ? {
+          link: new HttpLink({
+              uri: `${backendHost}/graphql`, // Server URL (must be absolute)
+              headers: {
+                  Authorization: `Bearer ${jwt}`
+              }
+          })
+      }
+    : {
+          link: new HttpLink({
+              uri: `${backendHost}/graphql` // Server URL (must be absolute)
+          })
+      }
 export default withData(config)
