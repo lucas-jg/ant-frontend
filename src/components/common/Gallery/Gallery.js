@@ -31,7 +31,7 @@ class Gallery extends React.Component {
             })
 
             return (
-                <div style={{ margin: '0 -20px' }}>
+                <div style={{ margin: '0 -16px' }}>
                     <ImageGallery
                         items={[...galleryItems, ...result]}
                         showFullscreenButton={false}
