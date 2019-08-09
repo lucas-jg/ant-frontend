@@ -77,7 +77,7 @@ const ClassesInfo = ({ target }) => {
                 .class-info-tamplate {
                     border: 2px solid #f3f3f3;
                     padding: 15px;
-                    margin: 0 -20px;
+                    margin: 0 -16px;
                     position: sticky;
                     top: 50px;
                     background: white;
