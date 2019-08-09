@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import '../../../../assets/gallery.css'
 import { backendHost } from '../../../lib/common'
+import GallyeryMainImage from '../../../../assets/image/gallery_main.png'
 
 class Gallery extends React.Component {
     render() {
@@ -14,20 +15,25 @@ class Gallery extends React.Component {
             data: { loading, error, plans }
         } = this.props
 
-        console.log(error)
-        console.log(backendHost)
+        const galleryItems = [
+            {
+                original: 'http://pixel.sc:1337/uploads/a3a234bed38142bea6cc09fc804031cc.png'
+            }
+        ]
 
         if (error) return 'Error Loading Dishes'
 
         if (plans) {
+            const result = plans[0].plannedclasses.map(planData => {
+                return {
+                    original: backendHost + planData.class.thumbnail[0].url
+                }
+            })
+
             return (
                 <>
                     <ImageGallery
-                        items={plans[0].plannedclasses.map(planData => {
-                            return {
-                                original: backendHost + planData.class.thumbnail[0].url
-                            }
-                        })}
+                        items={[...galleryItems, ...result]}
                         showFullscreenButton={false}
                         useBrowserFullscreen={false}
                         showPlayButton={false}
