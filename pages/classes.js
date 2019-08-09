@@ -106,7 +106,7 @@ const ClassesLayout = ({ target, media }) => {
 				{`
 					.class-info-fixed {
 						position: sticky;
-						bottom: 0;
+						bottom: 50px;
 						background: white;
 					}
 				`}

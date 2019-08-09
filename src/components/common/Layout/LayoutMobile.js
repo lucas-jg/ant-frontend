@@ -92,18 +92,14 @@ class LayoutMobile extends React.Component {
 									onClick={() => Router.push('/')}
 								/>
 								<div className="mobile-header">
-									<Icon
-										type="menu-fold"
-										onClick={this.showDrawer}
-										style={iconStyle}
-									/>
-									{!loggedUser && (
+									<Icon type="menu" onClick={this.showDrawer} style={iconStyle} />
+									{/* {!loggedUser && (
 										<Icon
 											type="login"
 											style={iconStyle}
 											onClick={() => Router.push('/signin')}
 										/>
-									)}
+									)} */}
 								</div>
 							</div>
 						)}
@@ -116,11 +112,6 @@ class LayoutMobile extends React.Component {
 							onClose={this.onClose}
 							visible={this.state.visible}
 						>
-							{loggedUser && (
-								<Button type="primary" onClick={unsetToken}>
-									로그아웃
-								</Button>
-							)}
 							<Menu style={{ lineHeight: '64px' }} selectedKeys={menuKey}>
 								{menuList.map(v => {
 									if (v.isAuthenticated) {
@@ -140,6 +131,29 @@ class LayoutMobile extends React.Component {
 										</Menu.Item>
 									)
 								})}
+								<div className="menu-blank" />
+								{loggedUser ? (
+									<div
+										className="navbar-brand"
+										style={{ color: '#333333' }}
+										onClick={() => {
+											unsetToken()
+											this.onClose()
+										}}
+									>
+										로그아웃
+									</div>
+								) : (
+									<Link href="/signin">
+										<a
+											className="navbar-brand"
+											style={{ color: '#333333', padding: '15px' }}
+											onClick={this.onClose}
+										>
+											로그인
+										</a>
+									</Link>
+								)}
 							</Menu>
 						</Drawer>
 						<Row>
@@ -165,6 +179,10 @@ class LayoutMobile extends React.Component {
 						}
 						.mobile-header {
 							margin-top: 7px;
+						}
+						.menu-blank {
+							background: gray;
+							height: 20px;
 						}
 					`}
 				</style>
