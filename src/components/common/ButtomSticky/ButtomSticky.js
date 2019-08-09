@@ -20,7 +20,8 @@ export default () => (
                     position: sticky;
                     width: 100%;
                     bottom: 0;
-                    background: white;
+                    color: white;
+                    background: #353d8a;
                     padding: 10px 30px;
                     display: flex;
                     justify-content: space-between;

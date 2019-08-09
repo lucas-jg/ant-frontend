@@ -101,7 +101,7 @@ class LayoutMobile extends React.Component {
                             </div>
                         )}
                     </Header>
-                    <Content style={{ margin: '50px 0', minHeight: '800px' }}>
+                    <Content style={{ margin: '0', minHeight: '800px' }}>
                         <Drawer
                             title="Welcome to Pixel"
                             placement={this.state.placement}
@@ -159,7 +159,12 @@ class LayoutMobile extends React.Component {
                             </Col>
                         </Row>
                     </Content>
-                    <Footer>Footer</Footer>
+                    <Footer>
+                        사업자등록번호 : xxx-xx-xxxxx 통신판매업신고번호 : 제2018-xxxx-xxx호
+                        대표이사 : xxx 법인명 : 엔트스튜디오 개인정보관리책임자 : xxx 주소 :
+                        서울특별시 다다다 아아아 호호호 대표번호 : 000-000-0000 서비스 문의 :
+                        help@pixel.sc 제휴 문의 : business@pixel.sc © Copyright AntStudio 2019 Ltd.
+                    </Footer>
                     <ButtomSticky />
                 </AntLayout>
                 <style jsx>

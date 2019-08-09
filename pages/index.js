@@ -28,11 +28,6 @@ export default class Index extends React.Component {
                 <Row>
                     <BestCategory />
                 </Row>
-                <Row>
-                    <Col>
-                        <ClassList />
-                    </Col>
-                </Row>
                 <PlanList />
             </>
         )
