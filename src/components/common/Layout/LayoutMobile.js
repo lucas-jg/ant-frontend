@@ -7,6 +7,7 @@ import { compose } from 'recompose'
 import LogoIcon from '../../../../assets/image/logo.png'
 import { getUserFromLocalCookie, unsetToken } from '../../../lib/auth'
 import { menuList } from './MenuList'
+import ButtomSticky from '../ButtomSticky'
 
 class LayoutMobile extends React.Component {
 	constructor(props) {
@@ -148,6 +149,7 @@ class LayoutMobile extends React.Component {
 						</Row>
 					</Content>
 					<Footer>Footer</Footer>
+					<ButtomSticky />
 				</AntLayout>
 				<style jsx>
 					{`
