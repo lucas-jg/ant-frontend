@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { compose } from 'recompose'
+import Router from 'next/router'
 
 class BestCategory extends React.Component {
     render() {
@@ -17,7 +18,11 @@ class BestCategory extends React.Component {
                         <h3>인기 카테고리</h3>
                         <div className="best-category-flex">
                             {hashtags.map((hashtag, i) => (
-                                <div className="best-category-button" key={i}>
+                                <div
+                                    className="best-category-button"
+                                    key={i}
+                                    onClick={() => Router.push(`/search?tag=${hashtag.tag}`)}
+                                >
                                     {hashtag.tag}
                                 </div>
                             ))}
@@ -44,6 +49,10 @@ class BestCategory extends React.Component {
                                 color: #353d8a;
                                 border-radius: 15px;
                                 text-align: center;
+                            }
+
+                            .best-category-button:hover {
+                                border: 1px solid #353d8a;
                             }
                         `}
                     </style>

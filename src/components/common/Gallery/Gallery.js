@@ -31,7 +31,7 @@ class Gallery extends React.Component {
             })
 
             return (
-                <>
+                <div style={{ margin: '0 -20px' }}>
                     <ImageGallery
                         items={[...galleryItems, ...result]}
                         showFullscreenButton={false}
@@ -43,7 +43,7 @@ class Gallery extends React.Component {
                         slideInterval={4000}
                         autoPlay
                     />
-                </>
+                </div>
             )
         } else {
             return <div />
