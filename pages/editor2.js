@@ -9,9 +9,9 @@ class Editor2 extends Component {
 				<div className="editor2">
 					<h1>react-email-editor Demo</h1>
 
-					<div>
+					{/* <div>
 						<button onClick={this.exportHtml}>Export HTML</button>
-					</div>
+					</div> */}
 
 					<EmailEditor ref={editor => (this.editor = editor)} />
 				</div>
