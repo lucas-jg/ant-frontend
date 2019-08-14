@@ -1,42 +1,87 @@
-import React, { Component } from 'react'
-import { Row, Col } from 'antd'
-import { EditorState } from 'draft-js'
-import { Editor as DraftEditor } from 'react-draft-wysiwyg'
-import ColorPic from './ColorPic'
-import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import React from 'react'
+import 'react-quill/dist/quill.snow.css'
 import './Editor.css'
 
-class Editor extends Component {
-    state = {
-        editorState: EditorState.createEmpty()
-    }
+class Editor extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = { editorHtml: '', theme: 'snow' }
+		this.handleChange = this.handleChange.bind(this)
+		if (typeof window !== 'undefined') {
+			this.ReactQuill = require('react-quill')
+		}
+	}
 
-    onEditorStateChange = editorState => {
-        console.log(JSON.stringify(editorState))
+	handleChange(html) {
+		console.log(html)
 
-        this.setState({
-            editorState
-        })
-    }
+		this.setState({ editorHtml: html })
+	}
 
-    render() {
-        const { editorState } = this.state
-        return (
-            <Row>
-                <Col>
-                    <DraftEditor
-                        editorState={editorState}
-                        wrapperClassName="demo-wrapper"
-                        editorClassName="demo-editor"
-                        onEditorStateChange={this.onEditorStateChange}
-                        toolbar={{
-                            colorPicker: { component: ColorPic }
-                        }}
-                    />
-                </Col>
-            </Row>
-        )
-    }
+	handleThemeChange(newTheme) {
+		if (newTheme === 'core') newTheme = null
+		this.setState({ theme: newTheme })
+	}
+
+	render() {
+		const ReactQuill = this.ReactQuill
+		if (typeof window !== 'undefined' && ReactQuill) {
+			return (
+				<>
+					<ReactQuill
+						theme={this.state.theme}
+						onChange={this.handleChange}
+						value={this.state.editorHtml}
+						modules={Editor.modules}
+						formats={Editor.formats}
+						bounds={'.app'}
+						placeholder={this.props.placeholder}
+					/>
+				</>
+			)
+		} else {
+			return <div />
+		}
+	}
 }
+
+/*
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
+Editor.modules = {
+	toolbar: [
+		[{ header: '1' }, { header: '2' }, { font: [] }],
+		[{ size: [] }],
+		['bold', 'italic', 'underline', 'strike', 'blockquote'],
+		[{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+		['link', 'image', 'video'],
+		['clean']
+	],
+	clipboard: {
+		// toggle to add extra line breaks when pasting HTML:
+		matchVisual: false
+	}
+}
+/*
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+Editor.formats = [
+	'header',
+	'font',
+	'size',
+	'bold',
+	'italic',
+	'underline',
+	'strike',
+	'blockquote',
+	'list',
+	'bullet',
+	'indent',
+	'link',
+	'image',
+	'video'
+]
 
 export default Editor
