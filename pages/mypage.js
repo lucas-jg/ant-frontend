@@ -92,7 +92,7 @@ class MyPage extends React.Component {
                             align-items: center;
                         }
                         .mypage-header-background {
-                            background: #3aa1b8;
+                            background: #353d8a;
                             width: 100%;
                             height: 100px;
                         }
@@ -142,8 +142,8 @@ class MyPage extends React.Component {
 }
 
 const GET_USER_INFO = gql`
-    query($username: String!) {
-        users(where: { username: $username }) {
+    query($username: JSON!) {
+        users(where: $username) {
             username
             email
             profileImage {
@@ -168,8 +168,8 @@ export default compose(
             return {
                 variables: {
                     username: !!props.router.query.id
-                        ? props.router.query.id
-                        : Cookies.get('username')
+                        ? { username: props.router.query.id }
+                        : { username: Cookies.get('username') }
                 }
             }
         },

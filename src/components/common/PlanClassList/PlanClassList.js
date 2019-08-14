@@ -97,12 +97,13 @@ class PlanClassList extends React.Component {
             const Pattern = plan.designPattern === 0 ? RenderDefaultPattern : RenderWidePattern
             return (
                 <div>
-                    <h1>{plan.title}</h1>
+                    <h3>{plan.title}</h3>
                     <Pattern plan={plan} />
 
                     <style jsx global>
                         {`
-                            h1 {
+                            h3 {
+                                color: #353d8a;
                                 margin-top: 20px;
                             }
                             a {
